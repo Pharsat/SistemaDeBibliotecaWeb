@@ -10,4 +10,5 @@ class AutorModel extends Model
     use HasFactory;
     protected $table = 'autor';
     public $timestamps = false;
+    protected $primaryKey = 'codigo';
 }
