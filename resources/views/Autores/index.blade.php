@@ -4,7 +4,7 @@
     <thead>
         <tr>
             <th colspan="2">
-                <a class="btn btn-primary" href="autor/create">Crear</a>
+                <a class="btn btn-primary" href="autores/create">Crear</a>
             </th>
         </tr>
         <tr>

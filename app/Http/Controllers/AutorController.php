@@ -22,7 +22,7 @@ class AutorController extends Controller
      */
     public function create()
     {
-        //
+        return view('Autores.create');
     }
 
     /**
@@ -30,7 +30,11 @@ class AutorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $autor = new AutorModel();
+        $autor->nombre = $request->get('nombre');
+        $autor->save();
+
+        return redirect('/autores');
     }
 
     /**
