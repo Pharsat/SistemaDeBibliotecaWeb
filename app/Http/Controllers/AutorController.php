@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\AutorModel;
 
 class AutorController extends Controller
 {
@@ -11,7 +12,9 @@ class AutorController extends Controller
      */
     public function index()
     {
-        //
+        return view('Autores.index',[
+            'autores' => AutorModel::all()
+        ]);
     }
 
     /**
