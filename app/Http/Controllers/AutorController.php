@@ -70,8 +70,21 @@ class AutorController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $codigo)
     {
-        //
+        $autor = AutorModel::find($codigo);
+        $autor->delete();
+
+        return redirect('/autores');
+    }
+
+    /**
+     * redirects to confirm deletion page.
+     */
+    public function confirmDelete(string $codigo)
+    {
+        return view('Autores.confirmDelete',[
+            'autor' => AutorModel::find($codigo)
+        ]);
     }
 }

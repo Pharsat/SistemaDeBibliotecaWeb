@@ -19,3 +19,4 @@ use App\Http\Controllers\AutorController;
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/dashboard', [DashboardController::class, 'index']);
 Route::resource('/autores', AutorController::class);
+Route::get('/autores/{codigo}/confirmDelete', [AutorController::class, 'confirmDelete']);
