@@ -20,7 +20,7 @@
             </ul>
           </div>
         </div>
-      </nav>
+    </nav>
     <div class="container-fluid">
         <hr>
         @yield('content')
