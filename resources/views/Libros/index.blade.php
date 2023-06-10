@@ -23,12 +23,12 @@
             <tr>
                 <td>{{$libro->codigo}}</td>
                 <td>{{$libro->titulo}}</td>
-                <td>{{$libro->pagina}}</td>
+                <td>{{$libro->paginas}}</td>
                 <td>{{$libro->ISBN}}</td>
                 <td>{{$libro->editorial}}</td>
-                <td>{{$libro->autor}}</td>
-                <td><a class="btn btn-primary" href="/autores/{{$autor->codigo}}/edit">Editar</a></td>
-                <td><a class="btn btn-danger" href="/autores/{{$autor->codigo}}/confirmDelete">Eliminar</a></td>
+                <td>{{$libro->autor_nombre}}</td>
+                <td><a class="btn btn-primary" href="/libros/{{$libro->codigo}}/edit">Editar</a></td>
+                <td><a class="btn btn-danger" href="/libros/{{$libro->codigo}}/confirmDelete">Eliminar</a></td>
             </tr>
         @endforeach
     </tbody>
