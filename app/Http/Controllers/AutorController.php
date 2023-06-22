@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\AutorModel;
+use App\Models\LibroModel;
+use Illuminate\Support\Facades\Validator;
 
 class AutorController extends Controller
 {
@@ -13,7 +15,8 @@ class AutorController extends Controller
     public function index()
     {
         return view('Autores.index',[
-            'autores' => AutorModel::all()
+            'autores' => AutorModel::all(),
+            'error' => session('error')
         ]);
     }
 
@@ -22,7 +25,9 @@ class AutorController extends Controller
      */
     public function create()
     {
-        return view('Autores.create');
+        return view('Autores.create', [
+            'errors' => session('errors')
+        ]);
     }
 
     /**
@@ -30,6 +35,16 @@ class AutorController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'nombre' => 'required|max:50|',
+        ]);
+    
+        if ($validator->fails()) {
+            return redirect('autores/create')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+        
         $autor = new AutorModel();
         $autor->nombre = $request->get('nombre');
         $autor->save();
@@ -73,9 +88,18 @@ class AutorController extends Controller
     public function destroy(string $codigo)
     {
         $autor = AutorModel::find($codigo);
-        $autor->delete();
+        
+        $libros = LibroModel::select('*')
+        ->where('autor_codigo', $codigo)
+        ->get();
 
-        return redirect('/autores');
+        if ($libros->count() > 0) {
+            //return redirect()->action([self::class, 'index'],  ['error' => 'No puedes eliminar un autor con libros asociados en el sistema.']);
+            return redirect()->action([self::class, 'index'])->with('error', 'No puedes eliminar un autor con libros asociados en el sistema.');
+        } else {
+            $autor->delete();
+            return redirect('/autores');
+        }
     }
 
     /**
